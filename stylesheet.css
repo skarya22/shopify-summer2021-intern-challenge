@@ -1,0 +1,132 @@
+html {
+    /* Load system fonts */
+    font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI,
+      Roboto, Helvetica Neue, sans-serif;
+  
+    /* Make type rendering look crisper */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Disable auto-enlargement of small text in Safari */
+    text-size-adjust: 100%;
+  
+    /* Enable kerning and optional ligatures */
+    text-rendering: optimizeLegibility;
+}
+textarea {
+    font-family: inherit;
+}
+body {
+    text-align: center;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    position: relative;
+    background-color: #B4E1FA;
+}
+#topBar {
+    background-color: #084E8A;
+    margin-left: 25%;
+    margin-right: 25%;
+    border-radius: 15px;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+#nominations {
+    color: black;
+    bottom: 0;
+    left: 20%;
+    right: 20%;
+    text-align: center;
+    position: fixed;
+    background-color: #F49342;
+    border-radius: 1.5%;
+    transition: 2s;
+    vertical-align: bottom;
+    z-index: 49;
+}
+@media all and (max-width: 1000px) {
+    #nominations {
+        left:0;
+        right:0;
+        width: 100%;
+    }
+}
+table {
+    border-spacing: 0;
+    text-align: center;
+}
+tr, th, td {
+    transition: 2.5s;
+    padding: 0;
+    text-align: center;
+}
+#caption_1, #caption_2, #caption_3, #caption_4, #caption_5 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+}
+tr img {
+    transition: 2.5s;
+    width: 75%;
+}
+p {
+    transition: 2.5s;
+    padding: 0;
+    font-size: 1em;
+    margin: 0;
+}
+.img_row {
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+}
+button {
+    display: none;
+    padding: 5px;
+    margin: 5px;
+}
+#plot_box {
+    display: none;
+    position: fixed;
+    color: white;
+    text-align: center;
+    padding: 10px 10px;
+    border-radius: 6px;
+    left: 0;
+    width: 35%;
+    top:10%;
+    z-index: 50;
+    background-color: #5C6AC4;
+}
+
+#hover_image {
+    width: 50%;
+}
+
+button {
+    background-color: #EBF5FA;
+    border-radius: 10px;
+    border-color: #006FBB;
+    box-shadow: none;
+}
+button:hover {
+    background-color: #B4E1FA;
+}
+input {
+    background-color: #EBF5FA;
+    position: relative;
+    margin-top: 2.5%;
+    border-radius: 10px;
+    border-color: #006FBB;
+}
+input:hover {
+    background-color: #B4E1FA;
+}
+#whitespace {
+    margin-top: 10%;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+}

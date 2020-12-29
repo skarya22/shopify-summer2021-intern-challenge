@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="stylesheet.css">
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <title>
+            Test Page
+        </title>
+    </head>
+    <body>
+        <div id="topBar">
+            <h3>
+                Summer 2021 - Shopify Developer Intern Challenge:
+            </h3> 
+            <h2>
+                The Shoppies: Movie awards for entrepreneurs
+            </h2>
+        </div>
+        <form onSubmit="return search($('input[id=movie_name]').val())">
+            <input type="text" id="movie_name">
+            <input type="submit" value='Search'></input>
+        </form>
+        <p id="list"><br></p>
+        <button type='button' id='button_0'></button>
+        <button type='button' id='button_1'></button>
+        <button type='button' id='button_2'></button>
+        <p></p>
+        <button type='button' id='button_3'></button>
+        <button type='button' id='button_4'></button>
+        <div id='whitespace'></div>
+        <div id='plot_box'></div>
+        <div>
+            
+            <div class="button_div" id="nominations">
+                <table>
+                    <th colspan=5>Nominations:</th>
+                    <tr>
+                        <td class='img_row'><img src="images/nomination_empty.jpg" alt="" id="img_1"></td>
+                        <td class='img_row'><img src="images/nomination_empty.jpg" alt="" id="img_2"></td>
+                        <td class='img_row'><img src="images/nomination_empty.jpg" alt="" id="img_3"></td>
+                        <td class='img_row'><img src="images/nomination_empty.jpg" alt="" id="img_4"></td>
+                        <td class='img_row'><img src="images/nomination_empty.jpg" alt="" id="img_5"></td>
+                    </tr>
+                    <tr>
+                        <td><p id="caption_1">Nomination<br>Empty</p></td>
+                        <td><p id="caption_2">Nomination<br>Empty</p></td>
+                        <td><p id="caption_3">Nomination<br>Empty</p></td>
+                        <td><p id="caption_4">Nomination<br>Empty</p></td>
+                        <td><p id="caption_5">Nomination<br>Empty</p></td>
+                    </tr>
+                    <tr>
+                        <td><br></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <script>
+            array_of_nominations = [$('#img_1'), $('#img_2'), $('#img_3'), $('#img_4'), $('#img_5')]
+            array_of_captions = [$('#caption_1'), $('#caption_2'), $('#caption_3'), $('#caption_4'), $('#caption_5')]
+            array_of_data = [];
+            dataOrder = [];
+            allDone = false;
+            $('button').hover(function() {
+                num = $(this).attr('id').substring(7,8);
+                for (i = 0; i < dataOrder.length; i++) {
+                    if (dataOrder[i] === num) {
+                        num = dataOrder[i];
+                    }
+                }
+                this_data = array_of_data[num];
+                if (this_data.Poster === 'N/A') {
+                    $('#plot_box').html("<img id='hover_image' src='images/no_poster.jpg''>");
+                } else {
+                    $('#plot_box').html("<img id='hover_image' src='" + this_data.Poster + "''>");
+                }
+                $('#plot_box').append("<p style='color: white'>" + this_data.Plot + "</p>")
+                $('#plot_box').append("<p style='color: #EBF5FA'>Actors: " + this_data.Actors + "</p>");
+                if (this_data.Ratings[1] != null) {
+                    $('#plot_box').append("<p style='color: #FEAD9A'>Rotten Tomatoes: " + this_data.Ratings[1].Value + '</p>');
+                } else {
+                    $('#plot_box').append('<p style="color: #FEAD9A">Rotten Tomatoes: N/A</p>');
+                }
+                if (this_data.imdbRating != null) {
+                    $('#plot_box').append('<p style="color: #fffad1">imdb Rating: ' + this_data.imdbRating + '</p>');
+                }
+                
+                if (num == 0 || num == 3) {
+                    $('#plot_box').css('left', '62.5%');
+                    console.log(num)
+                } else {
+                    $('#plot_box').css('left', '2.5%');
+                }
+                $('#plot_box').show();                
+            },)
+            $('#plot_box').click(function() {
+                $('#plot_box').hide();
+            })
+            $('#plot_box').mouseenter(function() {
+                console.log($('#plot_box').css('left'))
+                if ($('#plot_box').css('left') === '62.5%') $('#plot_box').css('left', '2.5%');
+                if ($('#plot_box').css('left') === '2.5%') $('#plot_box').css('left', '62.5%');
+            })
+            function search(String) {
+                $('#plot_box').hide();
+                $("#list").html("<br />");
+                $.get("http://www.omdbapi.com/?apikey=950b4470&s=" + String + "&type=movie", function(data) {
+                    if (data.Response === "False") {
+                        $('#list').html("<br>No results");
+                        $('button').css('display', 'none');
+                        return false;
+                    } 
+                    array_of_data = [];
+                    dataOrder = [];
+                    anythingAdded = false;
+                    for (i = 0; i < 5 && i < data.totalResults && i < 10; i++) {
+                        movie = data.Search[i].Title + " (" + data.Search[i].Year +  ")";
+                        $('#button_' + i).html(movie);
+                        id = data.Search[i].imdbID
+                        $('#button_' + i).attr('onclick', 'nominate("' + i + '")');
+                        $('#button_' + i).css('display', 'inline')
+                        addData(id, i);
+                    }  
+                });       
+                return false;
+            }
+            function addData(id, i) {
+                $.get("http://www.omdbapi.com/?apikey=950b4470&i=" + id, function(data) {
+                    array_of_data[i] = data;
+                });
+            }
+            function nominate(num) {
+                isOnList = false;
+                data = array_of_data[num];
+                text = data.Title + " (" + data.Year + ")";
+                for (i = 0; i < 5; i++) {
+                    if (array_of_captions[i].text() === text) {
+                        isOnList = true;
+                    }
+                }
+                if (!isOnList) {
+                    setPoster(data.Poster, text);
+                }
+            }
+            function setPoster(URL, text) {
+                for (i = 0; i < 5; i++) {
+                    if (array_of_captions[i].text() === 'NominationEmpty') {
+                        if (URL === 'N/A') {
+                            array_of_nominations[i].attr('src', 'images/no_poster.jpg')
+                        } else {
+                            array_of_nominations[i].attr("src", URL);
+                        }
+                        array_of_captions[i].html(text);
+                        checkIfAllDone();
+                        break;
+                    }
+                }
+                
+            }
+            $('img').click(function() {
+                if (allDone) doneBannerOff();
+                array_of_captions[$(this).attr('id').charAt(4) - 1].html("Nomination<br>Empty");
+                $(this).attr('src', 'images/nomination_empty.jpg');
+                $(this).css('filter','')
+                allDone = false;
+                
+            })
+            $('img').hover(function() {
+                if($(this).attr('src') !== 'images/nomination_empty.jpg') {
+                    $(this).css('transition', '0.5s');
+                    $(this).css('filter', 'drop-shadow(0 0 20px red)')
+                } 
+            },function() {
+                $(this).css('transition', '0.5s');
+                $(this).css('filter', 'grayscale(0)');
+                $(this).css('transition', '2.5s');
+            })
+            function checkIfAllDone() {
+                allDone = true;
+                for(i = 0; i < 5; i++) {
+                    if (array_of_captions[i].text() === 'NominationEmpty') {
+                        allDone = false;
+                        break;
+                    }
+                }
+                if (allDone) doneBannerOn(); 
+            }
+            function doneBannerOn() {
+                $('#plot_box').hide();
+                $('#nominations').css('bottom', '10%');
+                $('#nominations').css('background-color', '#EEC200');
+                $('#nominations').css('left','10%').css('right','10%');
+                $('th').html('Your five nominations are:');
+                $('#nominations').css('border-radius', '5%');
+                $('#nominations').css('z-index', '51');
+                $('th').css('font-size', '2em');
+                $('img').css('width', '100%');
+                $('.img_row').css('padding-right', '1%').css('padding-left', '1%');
+                $('p').css('font-weight', 'bold')
+            }
+            function doneBannerOff() {
+                $('#plot_box').hide();
+                $('#nominations').css('bottom', '0');
+                $('#nominations').css('background-color', '#F49342');
+                $('#nominations').css('left','20%').css('right','20%');
+                $('#nominations').css('border-radius', '0');
+                $('#nominations').css('z-index', '49');
+                $('th').html('Please finish your nominations again:');
+                $('th').css('font-size', '1em');
+                $('img').css('padding', '0', '0')
+                $('img').css('width', '75%');
+                $('p').css('font-weight', 'normal')
+                
+            }
+        </script>
+    </body>
+</html>
