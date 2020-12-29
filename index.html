@@ -3,6 +3,7 @@
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
         <title>
             Test Page
         </title>
@@ -69,7 +70,7 @@
                     }
                 }
                 this_data = array_of_data[num];
-                if (this_data.Poster === 'N/A') {
+                if (this_data.Poster === 'N/A' || this_data.Poster == null) {
                     $('#plot_box').html("<img id='hover_image' src='images/no_poster.jpg''>");
                 } else {
                     $('#plot_box').html("<img id='hover_image' src='" + this_data.Poster + "''>");
@@ -126,7 +127,7 @@
                 return false;
             }
             function addData(id, i) {
-                $.get("http://www.omdbapi.com/?apikey=950b4470&i=" + id, function(data) {
+                $.get("https://www.omdbapi.com/?apikey=950b4470&i=" + id, function(data) {
                     array_of_data[i] = data;
                 });
             }
