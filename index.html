@@ -9,7 +9,7 @@
     </head>
     <body>
         <div id="topBar">
-            <h3>
+            <h3 style="color: #06457c">
                 Summer 2021 - Shopify Developer Intern Challenge:
             </h3> 
             <h2>
@@ -74,15 +74,15 @@
                 } else {
                     $('#plot_box').html("<img id='hover_image' src='" + this_data.Poster + "''>");
                 }
-                $('#plot_box').append("<p style='color: white'>" + this_data.Plot + "</p>")
-                $('#plot_box').append("<p style='color: #EBF5FA'>Actors: " + this_data.Actors + "</p>");
+                $('#plot_box').append("<p style='color: black'>" + this_data.Plot + "</p>")
+                $('#plot_box').append("<p style='color: #50495A'>Actors: " + this_data.Actors + "</p>");
                 if (this_data.Ratings[1] != null) {
                     $('#plot_box').append("<p style='color: #FEAD9A'>Rotten Tomatoes: " + this_data.Ratings[1].Value + '</p>');
                 } else {
                     $('#plot_box').append('<p style="color: #FEAD9A">Rotten Tomatoes: N/A</p>');
                 }
                 if (this_data.imdbRating != null) {
-                    $('#plot_box').append('<p style="color: #fffad1">imdb Rating: ' + this_data.imdbRating + '</p>');
+                    $('#plot_box').append('<p style="color: #EEC200">imdb Rating: ' + this_data.imdbRating + '</p>');
                 }
                 
                 if (num == 0 || num == 3) {
@@ -106,7 +106,7 @@
                 $("#list").html("<br />");
                 $.get("http://www.omdbapi.com/?apikey=950b4470&s=" + String + "&type=movie", function(data) {
                     if (data.Response === "False") {
-                        $('#list').html("<br>No results");
+                        $('#button_' + i).fadeOut(700);
                         $('button').css('display', 'none');
                         return false;
                     } 
@@ -118,7 +118,8 @@
                         $('#button_' + i).html(movie);
                         id = data.Search[i].imdbID
                         $('#button_' + i).attr('onclick', 'nominate("' + i + '")');
-                        $('#button_' + i).css('display', 'inline')
+                        $('#button_' + i).fadeIn(700);
+                        $('#button_' + i).css('display', 'inline');
                         addData(id, i);
                     }  
                 });       
@@ -201,8 +202,7 @@
             function doneBannerOff() {
                 $('#plot_box').hide();
                 $('#nominations').css('bottom', '0');
-                $('#nominations').css('background-color', '#F49342');
-                $('#nominations').css('left','20%').css('right','20%');
+                $('#nominations').css('background-color', '#FFC58B');
                 $('#nominations').css('border-radius', '0');
                 $('#nominations').css('z-index', '49');
                 $('th').html('Please finish your nominations again:');

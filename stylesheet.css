@@ -19,26 +19,28 @@ textarea {
 body {
     text-align: center;
     /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
-    position: relative;
-    background-color: #B4E1FA;
+    
 }
 #topBar {
-    background-color: #084E8A;
     width:100%;
-    border-radius: 15px;
-    color: white;
-    padding-top: 5px;
+    left:0;
+    right:0;
+    background-color: #EBF5FA;
+    border-radius: 10px;
+    color: #084E8A;
+    padding-top: 2.5px;
     padding-bottom: 5px;
     margin-bottom: 5px;
 }
 #nominations {
-    color: black;
+    color: #594430;
     bottom: 0;
     left: 20%;
     right: 20%;
     text-align: center;
     position: fixed;
-    background-color: #F49342;
+    background-color: #FCEBDB;
+    border: 2px solid #594430;
     border-radius: 1.5%;
     transition: 2s;
     vertical-align: bottom;
@@ -48,7 +50,9 @@ body {
     #nominations {
         left:0;
         right:0;
-        width: 100%;
+    }
+    #whitespace {
+        width: 40%;
     }
 }
 table {
@@ -80,15 +84,11 @@ p {
     padding-top: 0.5%;
     padding-bottom: 0.5%;
 }
-button {
-    display: none;
-    padding: 5px;
-    margin: 5px;
-}
 #plot_box {
     display: none;
     position: fixed;
-    color: white;
+    color: #50495A;
+    border: 2px solid #50495A;
     text-align: center;
     padding: 10px 10px;
     border-radius: 6px;
@@ -96,36 +96,42 @@ button {
     width: 35%;
     top:10%;
     z-index: 50;
-    background-color: #5C6AC4;
+    background-color: white;
 }
 
 #hover_image {
     width: 50%;
 }
-
 button {
+    display: none;
+    padding: 5px;
+    margin: 5px;
+    border: 2px solid #3E4E57;
     background-color: #EBF5FA;
-    border-radius: 10px;
-    border-color: #006FBB;
-    box-shadow: none;
+    border-radius: 5px;
+    transition: 1s;
+    color: #3E4E57;
 }
 button:hover {
-    background-color: #B4E1FA;
+    background-color: #BBE5B3;
+    transition: 0.25s;
 }
 input {
+    border: 2px solid #3E4E57;
     background-color: #EBF5FA;
+    border-radius: 5px;
     position: relative;
     margin-top: 2.5%;
-    border-radius: 10px;
-    border-color: #006FBB;
+    transition:1s;
 }
 input:hover {
-    background-color: #B4E1FA;
+    background-color: #EBF5FA;
 }
 #whitespace {
     margin-top: 10%;
     position: absolute;
     height: 100%;
-    width: 100%;
+    width: 50%;
     z-index: 0;
+    background-color: blue;
 }
