@@ -104,7 +104,7 @@
             function search(String) {
                 $('#plot_box').hide();
                 $("#list").html("<br />");
-                $.get("http://www.omdbapi.com/?apikey=950b4470&s=" + String + "&type=movie", function(data) {
+                $.get("/api/* http://www.omdbapi.com/?apikey=950b4470&s=" + String + "&type=movie:splat 200!", function(data) {
                     if (data.Response === "False") {
                         $('#button_' + i).fadeOut(700);
                         $('button').css('display', 'none');
