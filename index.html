@@ -53,10 +53,16 @@
             <button type='button' id='button_3'></button>
             <button type='button' id='button_4'></button>
         </div>
-        <button type="button" id='next_button'>More Movies -></button>
+        <button type="button" id='next_button'>More Movies &#8594</button>
         <p id='after_buttons'></p>
         <div id='whitespace'></div>
-        <div id='plot_box'></div>
+        <div id='plot_box'>
+            <img id='hover_img'>
+            <p id='plot_p' style='color: black'></p>
+            <p id='actors_p' style='color: #FEAD9A'></p>
+            <p id='rotten_p' style='color: #FEAD9A'></p>
+            <p id='imdb_p' style="color: #EEC200"></p>
+        </div>
         <div>
             <div id="nominations">
                 <table>
@@ -86,7 +92,6 @@
             array_of_nominations = [$('#img_1'), $('#img_2'), $('#img_3'), $('#img_4'), $('#img_5')]
             array_of_captions = [$('#caption_1'), $('#caption_2'), $('#caption_3'), $('#caption_4'), $('#caption_5')]
             array_of_data = [];
-            // dataOrder = [];
             allDone = false;
             nextFive = [];
             atNext = false;
@@ -108,31 +113,28 @@
             })
             $('#buttons button').mouseenter(function() {
                 num = $(this).attr('id').substring(7,8);
-                // for (i = 0; i < dataOrder.length; i++) {
-                //     if (dataOrder[i] === num) {
-                //         num = dataOrder[i];
-                //     }
-                // }
                 if (!atNext) {
                     this_data = array_of_data[num];
                 } else {
                     this_data = nextFive[num];
                 }
                 if (this_data === null || this_data.Poster === 'N/A' || this_data.Poster == null) {
-                    $('#plot_box').html("<img id='hover_image' src='images/no_poster.jpg''>");
+                    $('#hover_img').attr('src','images/no_poster.jpg');
                 } else {
-                    $('#plot_box').html("<img id='hover_image' src='" + this_data.Poster + "''>");
+                    $('#hover_img').attr('src',this_data.Poster);
                 }
-                $('#plot_box').append("<p style='color: black'>" + this_data.Plot + "</p>")
-                $('#plot_box').append("<p style='color: #50495A'>Actors: " + this_data.Actors + "</p>");
-                if (this_data.Ratings[1] != null) {
-                    $('#plot_box').append("<p style='color: #FEAD9A'>Rotten Tomatoes: " + this_data.Ratings[1].Value + '</p>');
-                } else {
-                    $('#plot_box').append('<p style="color: #FEAD9A">Rotten Tomatoes: N/A</p>');
-                }
-                if (this_data.imdbRating != null) {
-                    $('#plot_box').append('<p style="color: #EEC200">imdb Rating: ' + this_data.imdbRating + '</p>');
-                }
+                $('#hover_img').on('load', function() {
+                    $('#plot_p').html(this_data.Plot);
+                    $('#actors_p').html("Actors: " + this_data.Actors );
+                    if (this_data.Ratings[1] != null) {
+                        $('#rotten_p').html("Rotten Tomatoes: " + this_data.Ratings[1].Value);
+                    } else {
+                        $('#rotten_p').html('Rotten Tomatoes: N/A');
+                    }
+                    if (this_data.imdbRating != null) {
+                        $('#imdb_p').html('imdb Rating: ' + this_data.imdbRating);
+                    }
+                })
                 isOnLeft = plotOnLeft();
                 if (isOnLeft && parseInt($('#plot_box').css('left')) < 0) {
                     $('#plot_box').animate({left: '0%'});
@@ -173,7 +175,6 @@
                         return false;
                     } 
                     array_of_data = [];
-                    // dataOrder = [];
                     nextFive = [];
                     anythingAdded = false;
                     for (i = 0; i < 5 && i < data.totalResults; i++) {
@@ -228,7 +229,6 @@
                 }
             }
             function setPoster(URL, text) {
-                hidePlot();
                 for (i = 0; i < 5; i++) {
                     if (array_of_captions[i].text() === 'NominationEmpty') {
                         if (URL === 'N/A') {
@@ -247,13 +247,13 @@
                     for (i = 0; i < nextFive.length; i++) {
                         $('#button_' + i).html(nextFive[i].Title + " (" + nextFive[i].Year + " )");
                     }
-                    $(this).html('<-Previous Movies')
+                    $(this).html('&#8592 Previous Movies')
                 } else {
                     atNext = false;
                     for (i = 0; i < nextFive.length; i++) {
                         $('#button_' + i).html(array_of_data[i].Title + " (" + array_of_data[i].Year + " )");
                     }
-                    $(this).html('More Movies ->')
+                    $(this).html('More Movies &#8594')
                 }
             });
             $('#next_button').hover(function() {
