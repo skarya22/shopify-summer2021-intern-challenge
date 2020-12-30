@@ -161,9 +161,10 @@
                 $("#list").html("<br />");
                 $.get("https://www.omdbapi.com/?apikey=950b4470&s=" + String + "&type=movie", function(data) {
                     if (data.Response === "False") {
-                        $('#buttons button').fadeOut(700);
+                        $('#buttons button').hide();
                         $('buttons button').css('display', 'none');
-                        $('#list').html('<br>No Results')
+                        $('#list').html('<br>No Results');
+                        $('#next_button').hide();
                         return false;
                     } 
                     array_of_data = [];
