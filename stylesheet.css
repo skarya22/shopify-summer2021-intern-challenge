@@ -132,3 +132,44 @@ input:hover {
     width: 50%;
     z-index: 0;
 }
+h1 {
+    position: absolute;
+    left: 25px;
+    top: 0;
+    opacity: 50%;
+    color: #084E8A;
+    user-select: none;
+}
+h1:hover, #close_button:hover {
+    opacity: 1;
+}
+#info_box {
+    display: none;
+    width:40%;
+    left:-50%;
+    top: 15%;
+    background-color: #BBE5B3;
+    border: 2px solid #414F3E;
+    border-radius: 10px;
+    color: #414F3E;
+    padding-top: 2.5px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    position: absolute;
+    z-index: 100;
+}
+#me {
+    width: 30%;
+    border-radius: 50%;
+    border: 2px solid #414F3E;
+}
+a {
+    color: inherit;
+}
+#close_button {
+    right: 2.5%;
+    opacity: 50%;
+    margin: 0;
+    position: absolute;
+    user-select: none;
+}
