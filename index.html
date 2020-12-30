@@ -172,6 +172,8 @@
                     array_of_data = [];
                     nextFive = [];
                     anythingAdded = false;
+                    atNext = false;
+                    $('#next_button').html('More Movies &#8594')
                     for (i = 0; i < 5 && i < data.totalResults; i++) {
                         movie = data.Search[i].Title + " (" + data.Search[i].Year +  ")";
                         $('#button_' + i).html(movie);
