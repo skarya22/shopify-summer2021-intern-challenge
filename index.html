@@ -31,7 +31,6 @@
         <div id='whitespace'></div>
         <div id='plot_box'></div>
         <div>
-            
             <div class="button_div" id="nominations">
                 <table>
                     <th colspan=5>Nominations:</th>
@@ -62,7 +61,7 @@
             array_of_data = [];
             dataOrder = [];
             allDone = false;
-            $('button').hover(function() {
+            $('button').mouseenter(function() {
                 num = $(this).attr('id').substring(7,8);
                 for (i = 0; i < dataOrder.length; i++) {
                     if (dataOrder[i] === num) {
@@ -70,7 +69,7 @@
                     }
                 }
                 this_data = array_of_data[num];
-                if (this_data.Poster === 'N/A' || this_data.Poster == null) {
+                if (this_data === null || this_data.Poster === 'N/A' || this_data.Poster == null) {
                     $('#plot_box').html("<img id='hover_image' src='images/no_poster.jpg''>");
                 } else {
                     $('#plot_box').html("<img id='hover_image' src='" + this_data.Poster + "''>");
@@ -85,21 +84,38 @@
                 if (this_data.imdbRating != null) {
                     $('#plot_box').append('<p style="color: #EEC200">imdb Rating: ' + this_data.imdbRating + '</p>');
                 }
-                
+                isOnLeft = plotOnLeft();
+                if (isOnLeft && parseInt($('#plot_box').css('left')) < 0) {
+                    $('#plot_box').animate({left: '2.5%'});
+                } else if (!isOnLeft && parseInt($('#plot_box').css('left')) > parseInt($('#topBar').css('left'))) {
+                    $('#plot_box').animate({left: '62.5%'});
+                }
                 $('#plot_box').show();                
-            },)
+            })
             
             $('#plot_box').mouseenter(function() {
+                if (plotOnLeft()) {
+                    $('#plot_box').animate({left:'62.5%'});
+                } else {
+                    $('#plot_box').animate({left: '2.5%'});
+                }
+            })
+
+            function plotOnLeft() {
                 halfScreenWidth = parseInt($('#topBar').css('width'))/2;
                 leftWidth = parseInt($('#plot_box').css('left').substring(0,$('#plot_box').css('left').length - 2))
                 if (halfScreenWidth < leftWidth) {
-                    $('#plot_box').animate({left:'2.5%'});
+                    return false;
                 } else {
-                    $('#plot_box').animate({left: '62.5%'});
+                    return true;
                 }
-            })
+            }
             function search(String) {
-                $('#plot_box').hide();
+                if (plotOnLeft()) {
+                    $('#plot_box').animate({left: '-150%'});
+                } else {
+                    $('#plot_box').animate({left: '150%'});
+                }
                 $("#list").html("<br />");
                 $.get("https://www.omdbapi.com/?apikey=950b4470&s=" + String + "&type=movie", function(data) {
                     if (data.Response === "False") {
@@ -139,9 +155,19 @@
                 if (!isOnList) {
                     setPoster(data.Poster, text);
                 }
+                checkIfAllDone();
+            }
+            function hidePlot() {
+                if (plotOnLeft()) {
+                    $('#plot_box').animate({left: '-50%'});
+                } else {
+                    $('#plot_box').animate({left: '150%'});
+                }
             }
             function setPoster(URL, text) {
+                hidePlot();
                 for (i = 0; i < 5; i++) {
+                    $('p').clone(true).append('#topBar');
                     if (array_of_captions[i].text() === 'NominationEmpty') {
                         if (URL === 'N/A') {
                             array_of_nominations[i].attr('src', 'images/no_poster.jpg')
@@ -149,7 +175,6 @@
                             array_of_nominations[i].attr("src", URL);
                         }
                         array_of_captions[i].html(text);
-                        checkIfAllDone();
                         break;
                     }
                 }
@@ -184,7 +209,7 @@
                 if (allDone) doneBannerOn(); 
             }
             function doneBannerOn() {
-                $('#plot_box').hide();
+                hidePlot();
                 $('#nominations').css('bottom', '10%');
                 $('#nominations').css('background-color', '#EEC200');
                 $('#nominations').css('left','10%').css('right','10%');
@@ -192,7 +217,7 @@
                 $('#nominations').css('border-radius', '5%');
                 $('#nominations').css('z-index', '51');
                 $('th').css('font-size', '2em');
-                $('img').css('width', '100%');
+                $('.img_row img').css('width', '100%');
                 $('.img_row').css('padding-right', '1%').css('padding-left', '1%');
                 $('p').css('font-weight', 'bold')
             }
@@ -204,8 +229,8 @@
                 $('#nominations').css('z-index', '49');
                 $('th').html('Please finish your nominations again:');
                 $('th').css('font-size', '1em');
-                $('img').css('padding', '0', '0')
-                $('img').css('width', '75%');
+                $('.img_row img').css('padding', '0', '0')
+                $('.img_row img').css('width', '75%');
                 $('p').css('font-weight', 'normal')
                 
             }

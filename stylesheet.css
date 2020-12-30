@@ -18,8 +18,7 @@ textarea {
 }
 body {
     text-align: center;
-    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
-    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
 }
 #topBar {
     width:100%;
@@ -46,7 +45,7 @@ body {
     vertical-align: bottom;
     z-index: 49;
 }
-@media all and (max-width: 1000px) {
+@media all and (max-width: 900px) {
     #nominations {
         left:0;
         right:0;
@@ -92,13 +91,12 @@ p {
     text-align: center;
     padding: 10px 10px;
     border-radius: 6px;
-    left: 0;
-    width: 35%;
-    top:10%;
+    left: -50%;
+    top:0;
+    width: 30%;
     z-index: 50;
     background-color: white;
 }
-
 #hover_image {
     width: 50%;
 }
