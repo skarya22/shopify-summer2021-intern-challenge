@@ -86,22 +86,16 @@
                     $('#plot_box').append('<p style="color: #EEC200">imdb Rating: ' + this_data.imdbRating + '</p>');
                 }
                 
-                if (num == 0 || num == 3) {
-                    $('#plot_box').css('left', '62.5%');
-                    console.log(num)
-                } else {
-                    $('#plot_box').css('left', '2.5%');
-                }
                 $('#plot_box').show();                
             },)
+            
             $('#plot_box').mouseenter(function() {
-                $('#plot_box').fadeOut();
-            })
-            $('#plot_box').mouseenter(function() {
-                if ($('#plot_box').css('left') > $('#plot_box').css('right')) {
-                    $('#plot_box').css('left', '2.5%');
+                halfScreenWidth = parseInt($('#topBar').css('width'))/2;
+                leftWidth = parseInt($('#plot_box').css('left').substring(0,$('#plot_box').css('left').length - 2))
+                if (halfScreenWidth < leftWidth) {
+                    $('#plot_box').animate({left:'2.5%'});
                 } else {
-                    $('#plot_box').css('left', '62.5%');
+                    $('#plot_box').animate({left: '62.5%'});
                 }
             })
             function search(String) {
@@ -109,7 +103,7 @@
                 $("#list").html("<br />");
                 $.get("https://www.omdbapi.com/?apikey=950b4470&s=" + String + "&type=movie", function(data) {
                     if (data.Response === "False") {
-                        $('#button_' + i).fadeOut(700);
+                        $('button').fadeOut(700);
                         $('button').css('display', 'none');
                         return false;
                     } 
