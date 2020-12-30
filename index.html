@@ -97,17 +97,8 @@
             atNext = false;
             $('h1').hover(function() {
                 $('#info_box').css('display','inline');
-                $('#info_box').animate({left: '-35%'})
-            }, function() {
-                console.log(parseInt($('#topBar').css('width')))
-                if(parseInt($('#info_box').css('left')) < 0) {
-                    $('#info_box').animate({left: '-50%'})
-                }
-                
-            })
-            $('h1').click(function() {
                 $('#info_box').animate({left: '30%'})
-            });
+            },)
             $('#close_button').click(function() {
                 $('#info_box').animate({left: '-50%'})
             })
