@@ -58,6 +58,7 @@
         <div id='whitespace'></div>
         <div id='plot_box'>
             <img id='hover_img' style='width: 70%;'>
+            <h4 id='movie_title' style="margin:0"></h4>
             <p id='plot_p' style='color: black'></p>
             <p id='actors_p' style='color: #FEAD9A'></p>
             <p id='rotten_p' style='color: #FEAD9A'></p>
@@ -115,6 +116,7 @@
                     $('#hover_img').attr('src',this_data.Poster);
                 }
                 $('#hover_img').on('load', function() {
+                    $('#movie_title').html(this_data.Title + " (" + this_data.Year + ")")
                     $('#plot_p').html(this_data.Plot);
                     $('#actors_p').html("Actors: " + this_data.Actors );
                     if (this_data.Ratings[1] != null) {
