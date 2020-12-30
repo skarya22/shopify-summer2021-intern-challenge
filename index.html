@@ -165,6 +165,7 @@
                 }
             }
             function search(String) {
+                $('input').animate({'margin-top': '0.5%'})
                 hidePlot();
                 $("#list").html("<br />");
                 $.get("https://www.omdbapi.com/?apikey=950b4470&s=" + String + "&type=movie", function(data) {
@@ -205,6 +206,7 @@
             }
             function nominate(num) {
                 hidePlot();
+                $('#nominations').animate({bottom: '0'});
                 isOnList = false;
                 if (!atNext) {
                     data = array_of_data[num];
@@ -243,6 +245,7 @@
                 }
             }
             $('#next_button').click(function() {
+                hidePlot();
                 if (!atNext) {
                     atNext = true;
                     for (i = 0; i < nextFive.length; i++) {
@@ -257,9 +260,6 @@
                     $(this).html('More Movies &#8594')
                 }
             });
-            $('#next_button').hover(function() {
-                hidePlot();
-            },)
             $('.img_row img').click(function() {
                 if (allDone) doneBannerOff();
                 array_of_captions[$(this).attr('id').charAt(4) - 1].html("Nomination<br>Empty");

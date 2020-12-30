@@ -37,7 +37,7 @@ body {
 }
 #nominations {
     color: #594430;
-    bottom: 0;
+    bottom: -50%;
     left: 20%;
     right: 20%;
     text-align: center;
@@ -113,7 +113,7 @@ input {
     background-color: #EBF5FA;
     border-radius: 5px;
     position: relative;
-    margin-top: 0.5%;
+    margin-top: 10%;
     transition:1s;
 }
 input:hover {
@@ -133,6 +133,7 @@ h1 {
     opacity: 50%;
     color: #084E8A;
     user-select: none;
+    z-index: 54;
 }
 h1:hover, #close_button:hover {
     opacity: 1;
