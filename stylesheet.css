@@ -45,15 +45,7 @@ body {
     vertical-align: bottom;
     z-index: 49;
 }
-@media all and (max-width: 900px) {
-    #nominations {
-        left:0;
-        right:0;
-    }
-    #whitespace {
-        width: 40%;
-    }
-}
+
 table {
     border-spacing: 0;
     text-align: center;
@@ -172,4 +164,13 @@ a {
     margin: 0;
     position: absolute;
     user-select: none;
+}
+@media all and (max-width: 900px) {
+    #nominations {
+        left:0;
+        right:0;
+    }
+    #whitespace {
+        width: 40%;
+    }
 }

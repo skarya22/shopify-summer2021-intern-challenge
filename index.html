@@ -29,11 +29,11 @@
                 Summer 2021 - Shopify Developer Intern Challenge:
             </h3> 
             <h2>
-                The Shoppies: Movie awards for entrepreneurs
+                The Shoppies: Movie Awards for Entrepreneurs
             </h2>
         </div>
         <form onSubmit="return search($('input[id=movie_name]').val())">
-            <input type="text" id="movie_name">
+            <input type="text" id="movie_name" placeholder=" Enter Movie Name Here">
             <input type="submit" value='Search'></input>
         </form>
         <p id="list"><br></p>
@@ -123,7 +123,6 @@
                 }
                 $('#plot_box').show();                
             })
-            
             $('#plot_box').mouseenter(function() {
                 if (allDone) {
                     hidePlot();
@@ -156,6 +155,7 @@
                     if (data.Response === "False") {
                         $('button').fadeOut(700);
                         $('button').css('display', 'none');
+                        $('#list').html('<br>No Results')
                         return false;
                     } 
                     array_of_data = [];
@@ -213,7 +213,6 @@
                         break;
                     }
                 }
-                
             }
             $('.img_row img').click(function() {
                 if (allDone) doneBannerOff();
@@ -221,7 +220,6 @@
                 $(this).attr('src', 'images/nomination_empty.jpg');
                 $(this).css('filter','')
                 allDone = false;
-                
             })
             $('.img_row img').hover(function() {
                 if($(this).attr('src') !== 'images/nomination_empty.jpg') {
