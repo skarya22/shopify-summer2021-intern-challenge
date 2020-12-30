@@ -94,9 +94,6 @@ p {
     z-index: 50;
     background-color: white;
 }
-#hover_image {
-    width: 70%;
-}
 button {
     display: none;
     padding: 5px;

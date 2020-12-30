@@ -57,7 +57,7 @@
         <p id='after_buttons'></p>
         <div id='whitespace'></div>
         <div id='plot_box'>
-            <img id='hover_img'>
+            <img id='hover_img' style='width: 70%;'>
             <p id='plot_p' style='color: black'></p>
             <p id='actors_p' style='color: #FEAD9A'></p>
             <p id='rotten_p' style='color: #FEAD9A'></p>
@@ -204,6 +204,7 @@
                 });
             }
             function nominate(num) {
+                hidePlot();
                 isOnList = false;
                 if (!atNext) {
                     data = array_of_data[num];
