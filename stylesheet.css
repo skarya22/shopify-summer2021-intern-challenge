@@ -53,11 +53,16 @@ body {
 table {
     border-spacing: 0;
     text-align: center;
+    table-layout: fixed;
+    width: 100% ;
+    height: 20%;
 }
 tr, th, td {
     transition: 2.5s;
     padding: 0;
     text-align: center;
+    width: 20% ;
+    height: 100%;
 }
 #caption_1, #caption_2, #caption_3, #caption_4, #caption_5 {
     display: -webkit-box;
@@ -186,8 +191,4 @@ a {
     padding-top: 2.5px;
     padding-bottom: 5px;
     margin-bottom: 5px;
-}
-#next_button {
-    display: none
-    ;
 }
