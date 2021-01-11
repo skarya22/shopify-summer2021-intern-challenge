@@ -127,14 +127,14 @@ input {
 input:hover {
     background-color: #EBF5FA;
 }
-h1 {
+#i_button {
     position: absolute;
     left: 25px;
     top: 0;
     opacity: 50%;
     color: #084E8A;
     user-select: none;
-    z-index: 54;
+    z-index: 49;
 }
 h1:hover, #close_button:hover {
     opacity: 1;

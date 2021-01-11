@@ -1,5 +1,5 @@
 // Make the info box slide in
-$('h1').hover(function() {
+$('#i_button').hover(function() {
     $('#info_box').css('display','inline');
     $('#info_box').animate({left: '30%'})
 },)
